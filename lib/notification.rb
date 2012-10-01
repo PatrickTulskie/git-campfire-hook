@@ -35,7 +35,7 @@ class GitCampfireNotification
   def project_name
     project_name = File.expand_path(`git rev-parse --git-dir 2>/dev/null`.strip).split("/").last
     if project_name == ".git"
-      project_name = File.basename(Dir.pwd)
+      project_name = File.basename(File.expand_path(File.join(Dir.pwd, "..")))
     end
     project_name.sub(/\.git$/, "")
   end
@@ -86,7 +86,7 @@ class GitCampfireNotification
     new_commits.each do |c|
       # say "#{c[:committer]} just committed #{c[:revision]}"
       # say "[#{project_name}] #{c[:message]}", :paste
-      say "[#{project_name}] #{c[:message]} - #{c[:committer]} (#{c[:revision]})"
+      say "[#{project_name}] #{c[:message]} - #{c[:committer]} (Revision: #{c[:revision]})"
     end
   end
 
