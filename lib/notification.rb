@@ -4,7 +4,6 @@ require 'tinder'
 class GitCampfireNotification
 
   def initialize(options = {})
-    # campfire_config keys: subdomain, use_ssl, email, password, room
     @campfire_config = options[:campfire_config]
 
     # git keys: ref_name, old_revision, new_revision
@@ -27,8 +26,7 @@ class GitCampfireNotification
 
   def campfire_room
     if @campfire.nil?
-      @campfire = Tinder::Campfire.new(@campfire_config[:subdomain], :ssl => @campfire_config[:use_ssl])
-      @campfire.login(@campfire_config[:email], @campfire_config[:password])
+      @campfire = Tinder::Campfire.new(@campfire_config[:subdomain], :token => @campfire_config[:api_key], :ssl => @campfire_config[:ssl])
     end
     @campfire_room ||= @campfire.find_room_by_name(@campfire_config[:room])
   end
