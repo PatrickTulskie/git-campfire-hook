@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'tinder'
+require 'yaml'
 
 class GitCampfireNotification
 
