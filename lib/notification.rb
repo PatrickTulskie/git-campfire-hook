@@ -86,7 +86,7 @@ class GitCampfireNotification
     new_commits.each do |c|
       # say "#{c[:committer]} just committed #{c[:revision]}"
       # say "[#{project_name}] #{c[:message]}", :paste
-      say "[project_name] #{c[:message]} - #{c[:committer]} (#{c[:revision]})"
+      say "[#{project_name}] #{c[:message]} - #{c[:committer]} (#{c[:revision]})"
     end
   end
 
