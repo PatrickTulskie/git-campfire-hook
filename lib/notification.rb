@@ -83,10 +83,12 @@ class GitCampfireNotification
   end
 
   def speak_new_commits
-    new_commits.each do |c|
-      # say "#{c[:committer]} just committed #{c[:revision]}"
-      # say "[#{project_name}] #{c[:message]}", :paste
-      say "[#{project_name}] #{c[:message]} - #{c[:committer]} (Revision: #{c[:revision]})"
+    commits = new_commits
+    if commits.length > 5
+      say "[#{project_name}/#{short_ref_name}] Has #{commits.length} new commits.  Here's the last 5."
+    end
+    commits.last(5).each do |c|
+      say "[#{project_name}/#{short_ref_name}] #{c[:message]} - #{c[:committer]} (Revision: #{c[:revision]})"
     end
   end
 
